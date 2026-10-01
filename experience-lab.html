@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Case study by Cédric Verhaegh on an Experience Lab project combining traffic object detection in cycling footage with gaze and fixation data from Pupil Labs glasses." name="description"/>
+<meta content="Cédric Verhaegh" name="author"/>
+<meta content="Experience Lab: Eye Tracking &amp; Object Detection | Cédric Verhaegh" property="og:title"/>
+<meta content="Case study by Cédric Verhaegh on an Experience Lab project combining traffic object detection in cycling footage with gaze and fixation data from Pupil Labs glasses." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://cedricverhaegh.com" property="og:url"/>
+<title>Experience Lab: Eye Tracking &amp; Object Detection | Cédric Verhaegh</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&amp;display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode:'class',
+  theme:{extend:{
+    fontFamily:{display:['PT Sans','sans-serif'],body:['DM Sans','sans-serif']},
+    colors:{accent:'#3553B8','accent-light':'#4E68CC'}
+  }}
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{font-family:'DM Sans',sans-serif}
+h1,h2,h3,h4,h5,h6{font-family:'PT Sans',sans-serif}
+body{transition:background-color .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.35;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E")}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#3553B8;border-radius:99px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}.d4{transition-delay:.24s}
+.card-h{transition:transform .25s cubic-bezier(.4,0,.2,1),border-color .18s,background-color .18s}
+.card-h:hover{transform:translateY(-4px)}
+.nl{position:relative}
+.nl::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:currentColor;transition:width .22s}
+.nl:hover::after{width:100%}
+.tag{font-size:14px;padding:.28rem .7rem;border-radius:9999px}
+.project-link{display:block}
+.project-link:focus-visible{outline:2px solid #3553B8;outline-offset:4px;border-radius:1rem}
+.prose-cv p{margin:0 0 1.2rem;line-height:1.8}
+.prose-cv h2{font-size:1.8rem;font-weight:700;margin:2.6rem 0 .9rem}
+.prose-cv h3{font-size:1.2rem;font-weight:700;margin:1.8rem 0 .6rem}
+.prose-cv ul{list-style:disc;margin:0 0 1.4rem;padding-left:1.4rem}
+.prose-cv li{margin:.45rem 0;line-height:1.7}
+[x-cloak]{display:none!important}
+</style>
+</head>
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased">
+<header class="fixed inset-x-0 top-0 z-50 transition-all duration-300" id="site-nav">
+<nav aria-label="Main navigation" class="w-full px-6 md:px-10 h-16 flex items-center justify-between">
+<a class="font-display font-bold text-xl tracking-tight" href="index.html">
+<span class="text-zinc-900 dark:text-white">Cédric </span><span class="text-accent">Verhaegh</span>
+</a>
+<ul class="hidden md:flex items-center gap-8 text-[16px] ml-auto" role="list">
+<li><a class="nl text-accent transition-colors" href="projects.html">Projects</a></li>
+<li><a class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" href="index.html#about">About</a></li>
+<li><a class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" href="index.html#skills">Skills</a></li>
+<li><a class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" href="index.html#contact">Contact</a></li>
+</ul>
+<button aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle menu" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800" id="menuBtn">
+<svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</nav>
+<div class="hidden md:hidden bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-t border-zinc-100 dark:border-zinc-900" id="mobileMenu">
+<ul class="flex flex-col items-end px-6 py-5 gap-4 text-[16px] font-medium text-right" role="list">
+<li><a class="mobile-link block text-zinc-700 dark:text-zinc-300 hover:text-accent" href="projects.html">Projects</a></li>
+<li><a class="mobile-link block text-zinc-700 dark:text-zinc-300 hover:text-accent" href="index.html#about">About</a></li>
+<li><a class="mobile-link block text-zinc-700 dark:text-zinc-300 hover:text-accent" href="index.html#skills">Skills</a></li>
+<li><a class="mobile-link block text-zinc-700 dark:text-zinc-300 hover:text-accent" href="index.html#contact">Contact</a></li>
+</ul>
+</div>
+</header>
+<main>
+<article>
+<header class="pt-32 pb-10 max-w-4xl mx-auto px-6">
+<a class="reveal inline-flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-accent transition-colors mb-8" href="projects.html">← Back to projects</a>
+<div class="reveal d1 flex flex-wrap gap-2 mb-5"><span class="tag bg-blue-50 dark:bg-accent/15 text-accent-light border border-blue-200 dark:border-accent/35">Computer Vision</span><span class="tag bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-transparent">Eye Tracking</span><span class="tag bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-transparent">Applied AI</span></div>
+<h1 class="reveal d2 font-display font-bold text-5xl md:text-7xl leading-[1.03] text-zinc-900 dark:text-white mb-6">Experience Lab: Eye Tracking &amp; Object Detection</h1>
+<p class="reveal d3 text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed">Combining traffic object detection in cycling footage with gaze and fixation data from Pupil Labs glasses to support behavioural research.</p>
+</header>
+<section class="max-w-4xl mx-auto px-6 pb-12">
+<div class="reveal grid sm:grid-cols-3 gap-4">
+<div class="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-5">
+<p class="text-xs uppercase tracking-widest text-zinc-400 mb-2">Role</p>
+<p class="font-medium">Data Scientist · Team project</p>
+</div>
+<div class="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-5">
+<p class="text-xs uppercase tracking-widest text-zinc-400 mb-2">Focus</p>
+<p class="font-medium">Object detection &amp; gaze analysis</p>
+</div>
+<div class="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-5">
+<p class="text-xs uppercase tracking-widest text-zinc-400 mb-2">Context</p>
+<p class="font-medium">BUas Experience Lab</p>
+</div>
+</div>
+</section>
+<section class="max-w-3xl mx-auto px-6 pb-20 prose-cv text-[17px] text-zinc-600 dark:text-zinc-300">
+<h2 class="text-zinc-900 dark:text-white">The problem</h2>
+<p>Experience Lab uses Pupil Labs eye tracking glasses during cycling studies. The glasses record video footage together with gaze and fixation data. Researchers then need to determine which traffic objects a participant was looking at. Reviewing the recordings manually takes a lot of time.</p>
+<p>Our goal was to build a workflow that detects traffic objects in the video, automatically annotates them, and connects those detections with gaze and fixation data so the results can be analysed further.</p>
+<h2 class="text-zinc-900 dark:text-white">What I worked on</h2>
+<p>I worked as one of the data scientists on the project. My work included checking data quality, preparing datasets, developing and evaluating object detection models, and connecting the detections with data from Pupil Labs.</p>
+<ul>
+<li>Built a workflow for checking and reporting data quality.</li>
+<li>Developed and compared YOLO models for detecting several types of traffic objects.</li>
+<li>Processed complete cycling recordings and automatically annotated detected traffic objects over time.</li>
+<li>Connected detections with gaze and fixation data and produced structured results for further analysis.</li>
+<li>Used explainable AI methods to inspect how the models made their detections.</li>
+</ul>
+<h2 class="text-zinc-900 dark:text-white">Project workflow</h2>
+<div class="not-prose grid gap-4 my-6">
+<div class="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6">
+<p class="font-display font-bold text-zinc-900 dark:text-white mb-2">1. Data preparation</p>
+<p class="text-zinc-500 dark:text-zinc-400">Check annotations, timestamps and data sources before training the model.</p>
+</div>
+<div class="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6">
+<p class="font-display font-bold text-zinc-900 dark:text-white mb-2">2. Object detection</p>
+<p class="text-zinc-500 dark:text-zinc-400">Train and evaluate a YOLO model to detect different types of traffic objects.</p>
+</div>
+<div class="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6">
+<p class="font-display font-bold text-zinc-900 dark:text-white mb-2">3. Tracking and eye tracking data</p>
+<p class="text-zinc-500 dark:text-zinc-400">Run the model on cycling footage, track detected objects over time and match gaze and fixation data to those objects.</p>
+</div>
+<div class="rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6">
+<p class="font-display font-bold text-zinc-900 dark:text-white mb-2">4. Results</p>
+<p class="text-zinc-500 dark:text-zinc-400">Export the combined data so researchers can analyse which traffic objects appeared and which objects participants looked at.</p>
+</div>
+</div>
+<h2 class="text-zinc-900 dark:text-white">Tools &amp; technologies</h2>
+<div class="not-prose flex flex-wrap gap-2 my-5">
+<span class="tag bg-blue-50 dark:bg-accent/15 text-accent-light border border-blue-200 dark:border-accent/35">Python</span><span class="tag bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-transparent">YOLO</span><span class="tag bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-transparent">OpenCV</span><span class="tag bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-transparent">Pandas</span><span class="tag bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-transparent">Pupil Labs</span><span class="tag bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-transparent">Streamlit</span><span class="tag bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-transparent">Explainable AI</span>
+</div>
+</section>
+</article>
+<section class="bg-zinc-50 dark:bg-zinc-900/50 py-16">
+<div class="max-w-6xl mx-auto px-6">
+<div class="flex items-center justify-between gap-4 mb-8">
+<h2 class="font-display font-bold text-2xl text-zinc-900 dark:text-white">More projects</h2>
+<a class="text-sm font-medium text-accent" href="projects.html">View all →</a>
+</div>
+<div class="grid md:grid-cols-3 gap-6">
+
+<article class="card-h rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6">
+<div class="flex flex-wrap gap-2 mb-3"><span class="tag bg-blue-50 dark:bg-accent/15 text-accent-light border border-blue-200 dark:border-accent/35">MLOps</span></div>
+<h3 class="font-display font-bold text-xl mb-2">PyRootMancer: Computer Vision MLOps</h3>
+<p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">A team project that prepared a plant root computer vision solution for wider use by adding modular Python code, testing, an API, Docker and Azure Machine Learning.</p>
+</article><article class="card-h rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6">
+<div class="flex flex-wrap gap-2 mb-3"><span class="tag bg-blue-50 dark:bg-accent/15 text-accent-light border border-blue-200 dark:border-accent/35">Computer Vision</span></div>
+<h3 class="font-display font-bold text-xl mb-2">NPEC: Computer Vision &amp; Robotics</h3>
+<p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">A plant science project combining computer vision for measuring roots with PID control, reinforcement learning and autonomous robot movement.</p>
+</article><article class="card-h rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6">
+<div class="flex flex-wrap gap-2 mb-3"><span class="tag bg-blue-50 dark:bg-accent/15 text-accent-light border border-blue-200 dark:border-accent/35">Time Series</span></div>
+<h3 class="font-display font-bold text-xl mb-2">Public Nuisance Forecasting</h3>
+<p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">A municipality case using public nuisance data to explore patterns and forecast future demand for enforcement capacity.</p>
+</article></div>
+</div>
+</section>
+</main>
+<footer class="border-t border-zinc-100 dark:border-zinc-900">
+<div class="w-full px-6 md:px-10 py-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+<p class="text-[16px] text-zinc-400">© <span class="year"></span> Cédric Verhaegh. All rights reserved.</p>
+<p class="text-[14px] text-zinc-600">Template by <a class="hover:text-zinc-400" href="https://lbegey78.gumroad.com/" rel="noopener noreferrer" target="_blank">Laurent Begey</a> · Distributed by <a class="hover:text-zinc-400" href="https://themewagon.com/" rel="noopener noreferrer" target="_blank">ThemeWagon</a></p>
+</div>
+</footer>
+<script>
+const menuBtn=document.getElementById('menuBtn');
+const mobileMenu=document.getElementById('mobileMenu');
+if(menuBtn&&mobileMenu){
+  menuBtn.addEventListener('click',()=>{
+    const open=mobileMenu.classList.toggle('hidden')===false;
+    menuBtn.setAttribute('aria-expanded',String(open));
+  });
+  document.querySelectorAll('.mobile-link').forEach(a=>a.addEventListener('click',()=>mobileMenu.classList.add('hidden')));
+}
+const siteNav=document.getElementById('site-nav');
+window.addEventListener('scroll',()=>{
+  if(!siteNav)return;
+  siteNav.classList.toggle('bg-white/90',window.scrollY>20);
+  siteNav.classList.toggle('dark:bg-zinc-950/90',window.scrollY>20);
+  siteNav.classList.toggle('backdrop-blur-md',window.scrollY>20);
+  siteNav.classList.toggle('shadow-sm',window.scrollY>20);
+},{passive:true});
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');observer.unobserve(e.target)}})
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.querySelectorAll('.year').forEach(el=>el.textContent=new Date().getFullYear());
+</script>
+</body>
+</html>
