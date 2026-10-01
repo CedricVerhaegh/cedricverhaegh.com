@@ -62,8 +62,8 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 <span class="text-zinc-900 dark:text-white">Cédric </span><span class="text-accent">Verhaegh</span>
 </a>
 <ul class="hidden md:flex items-center gap-8 text-[16px] ml-auto" role="list">
-<li><a class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" href="#work">Projects</a></li>
 <li><a class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" href="#about">About</a></li>
+<li><a class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" href="#projects">Projects</a></li>
 <li><a class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" href="#skills">Skills</a></li>
 <li><a class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" href="#contact">Contact</a></li>
 </ul>
@@ -73,8 +73,8 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 </nav>
 <div class="hidden md:hidden bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-t border-zinc-100 dark:border-zinc-900" id="mobileMenu">
 <ul class="flex flex-col items-end px-6 py-5 gap-4 text-[16px] font-medium text-right" role="list">
-<li><a class="mobile-link block text-zinc-700 dark:text-zinc-300 hover:text-accent" href="#work">Projects</a></li>
 <li><a class="mobile-link block text-zinc-700 dark:text-zinc-300 hover:text-accent" href="#about">About</a></li>
+<li><a class="mobile-link block text-zinc-700 dark:text-zinc-300 hover:text-accent" href="#projects">Projects</a></li>
 <li><a class="mobile-link block text-zinc-700 dark:text-zinc-300 hover:text-accent" href="#skills">Skills</a></li>
 <li><a class="mobile-link block text-zinc-700 dark:text-zinc-300 hover:text-accent" href="#contact">Contact</a></li>
 </ul>
@@ -93,7 +93,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
       I develop models to analyse and visualise data, and explore how machine learning can be applied to computer vision, automation and other real-world problems.
     </p>
 <div class="reveal d3">
-<a class="inline-flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors text-[16px]" href="#work">View projects ↓</a>
+<a class="inline-flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors text-[16px]" href="#projects">View projects ↓</a>
 </div>
 </div>
 </section>
@@ -112,7 +112,7 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 </div>
 </div>
 </section>
-<section class="py-24" id="work">
+<section class="py-24" id="projects">
 <div class="max-w-6xl mx-auto px-6">
 <div class="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-5">
 <div>
@@ -233,6 +233,33 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 document.querySelectorAll('.year').forEach(el=>el.textContent=new Date().getFullYear());
+// Smooth-scroll homepage section links without keeping the section fragment in the URL.
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+  link.addEventListener('click',event=>{
+    const href=link.getAttribute('href');
+    if(!href || href==='#')return;
+    const target=document.getElementById(href.slice(1));
+    if(!target)return;
+    event.preventDefault();
+    target.scrollIntoView({behavior:'smooth'});
+    history.replaceState(null,'',window.location.pathname+window.location.search);
+  });
+});
+
+// If another portfolio page requested a homepage section, scroll there after returning home.
+const requestedSection=sessionStorage.getItem('portfolioSection');
+const initialSection=requestedSection || (window.location.hash ? window.location.hash.slice(1) : null);
+if(requestedSection)sessionStorage.removeItem('portfolioSection');
+
+if(initialSection){
+  window.addEventListener('load',()=>{
+    const target=document.getElementById(initialSection);
+    if(target){
+      target.scrollIntoView({behavior:'smooth'});
+      history.replaceState(null,'',window.location.pathname+window.location.search);
+    }
+  });
+}
 </script>
 </body>
 </html>
