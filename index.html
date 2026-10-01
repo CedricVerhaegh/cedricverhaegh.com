@@ -194,11 +194,88 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 <div class="max-w-6xl mx-auto px-6">
 <div class="bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-10 md:p-16 relative overflow-hidden">
 <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl pointer-events-none"></div>
-<div class="relative z-10 max-w-3xl">
+
+<div class="relative z-10 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
+
+<div class="max-w-xl">
 <p class="reveal text-[14px] font-medium text-accent tracking-widest uppercase mb-3">Contact</p>
 <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-white leading-tight mb-5">Want to get in touch?</h2>
-<p class="reveal d2 text-[18px] text-zinc-400 leading-relaxed mb-8">A private contact form will be added before the portfolio is published. In the meantime, you can explore my work on GitHub.</p>
-<a class="reveal d3 inline-flex items-center gap-2 bg-white text-zinc-900 font-medium px-6 py-3 rounded-full hover:bg-zinc-200 transition-colors text-[16px]" href="https://github.com/CedricVerhaegh" rel="noopener noreferrer" target="_blank">Visit my GitHub →</a>
+<p class="reveal d2 text-[18px] text-zinc-400 leading-relaxed mb-7">
+If you would like to contact me about an internship, job, project, or other opportunity, you can send me a message here.
+</p>
+
+<a class="reveal d3 inline-flex items-center gap-2 text-[16px] font-medium text-zinc-300 hover:text-white transition-colors" href="https://github.com/CedricVerhaegh221350" rel="noopener noreferrer" target="_blank">
+Visit my GitHub →
+</a>
+</div>
+
+<form
+class="reveal d2 space-y-5"
+id="contactForm"
+action="https://formspree.io/f/xwlpjzwq"
+method="POST"
+novalidate
+>
+
+<div>
+<label class="block text-sm font-medium text-zinc-200 mb-2" for="contactName">Name</label>
+<input
+class="w-full rounded-xl border border-zinc-700 bg-zinc-950/50 px-4 py-3 text-white placeholder:text-zinc-600 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25"
+id="contactName"
+name="name"
+type="text"
+autocomplete="name"
+required
+/>
+</div>
+
+<div>
+<label class="block text-sm font-medium text-zinc-200 mb-2" for="contactEmail">Email</label>
+<input
+class="w-full rounded-xl border border-zinc-700 bg-zinc-950/50 px-4 py-3 text-white placeholder:text-zinc-600 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25"
+id="contactEmail"
+name="email"
+type="email"
+autocomplete="email"
+required
+/>
+</div>
+
+<div>
+<label class="block text-sm font-medium text-zinc-200 mb-2" for="contactMessage">Message</label>
+<textarea
+class="w-full min-h-40 resize-y rounded-xl border border-zinc-700 bg-zinc-950/50 px-4 py-3 text-white placeholder:text-zinc-600 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25"
+id="contactMessage"
+name="message"
+required
+></textarea>
+</div>
+
+<div class="hidden" aria-hidden="true">
+<label for="contactWebsite">Website</label>
+<input id="contactWebsite" name="_gotcha" type="text" tabindex="-1" autocomplete="off"/>
+</div>
+
+<input type="hidden" name="_subject" value="Portfolio contact form"/>
+
+<div class="flex flex-col sm:flex-row sm:items-center gap-4">
+<button
+class="inline-flex items-center justify-center gap-2 bg-white text-zinc-900 font-medium px-6 py-3 rounded-full hover:bg-zinc-200 transition-colors text-[16px] disabled:opacity-60 disabled:cursor-not-allowed"
+id="contactSubmit"
+type="submit"
+>
+Send message
+</button>
+
+<p class="text-sm text-zinc-500">
+Your details are only used to respond to your message.
+</p>
+</div>
+
+<p class="hidden rounded-xl px-4 py-3 text-sm" id="contactStatus" role="status" aria-live="polite"></p>
+
+</form>
+
 </div>
 </div>
 </div>
@@ -260,6 +337,68 @@ if(initialSection){
     }
   });
 }
+
+// Submit the contact form without leaving the portfolio page.
+const contactForm=document.getElementById('contactForm');
+const contactSubmit=document.getElementById('contactSubmit');
+const contactStatus=document.getElementById('contactStatus');
+
+if(contactForm&&contactSubmit&&contactStatus){
+
+  contactForm.addEventListener('submit',async event=>{
+
+    event.preventDefault();
+
+    if(!contactForm.checkValidity()){
+      contactForm.reportValidity();
+      return;
+    }
+
+    contactSubmit.disabled=true;
+    contactSubmit.textContent='Sending...';
+
+    contactStatus.className='hidden rounded-xl px-4 py-3 text-sm';
+
+    try{
+
+      const response=await fetch(contactForm.action,{
+        method:'POST',
+        body:new FormData(contactForm),
+        headers:{
+          'Accept':'application/json'
+        }
+      });
+
+      if(response.ok){
+
+        contactForm.reset();
+
+        contactStatus.textContent='Thanks, your message has been sent.';
+        contactStatus.className='rounded-xl px-4 py-3 text-sm bg-emerald-500/10 text-emerald-300 border border-emerald-500/20';
+
+      }else{
+
+        contactStatus.textContent='Something went wrong while sending your message. Please try again.';
+        contactStatus.className='rounded-xl px-4 py-3 text-sm bg-red-500/10 text-red-300 border border-red-500/20';
+
+      }
+
+    }catch(error){
+
+      contactStatus.textContent='Something went wrong while sending your message. Please try again.';
+      contactStatus.className='rounded-xl px-4 py-3 text-sm bg-red-500/10 text-red-300 border border-red-500/20';
+
+    }finally{
+
+      contactSubmit.disabled=false;
+      contactSubmit.textContent='Send message';
+
+    }
+
+  });
+
+}
+
 </script>
 </body>
 </html>
