@@ -149,13 +149,13 @@ body::before{
 }
 
 .prose-cv h2{
-  font-size:1.8rem;
+  font-size:2rem;
   font-weight:700;
   margin:2.6rem 0 .9rem
 }
 
 .prose-cv h3{
-  font-size:1.2rem;
+  font-size:1.25rem;
   font-weight:700;
   margin:1.8rem 0 .6rem
 }
@@ -569,7 +569,7 @@ Streamlit
 </span>
 
 <span class="tag bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-transparent">
-Explainable AI
+Eigen-CAM (XAI)
 </span>
 
 </div>
@@ -578,10 +578,10 @@ Explainable AI
 
 </div>
 
-<section class="max-w-6xl mx-auto px-6 pb-20 text-[17px] text-zinc-600 dark:text-zinc-300">
+<section class="max-w-6xl mx-auto px-6 pb-20 text-lg text-zinc-600 dark:text-zinc-300">
 
 
-<div class="max-w-4xl prose-cv">
+<div class="w-full prose-cv">
 
 <h2 class="text-zinc-900 dark:text-white">
 The problem
@@ -667,7 +667,7 @@ The same cycling frame before and after object detection, tracking and gaze and 
 </div>
 
 
-<div class="max-w-4xl prose-cv">
+<div class="w-full prose-cv">
 
 <h2 class="text-zinc-900 dark:text-white">
 How I approached it
@@ -689,7 +689,7 @@ How I approached it
 Understand
 </p>
 
-<p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+<p class="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed">
 Explore the recordings, data structure and what researchers needed from the results.
 </p>
 
@@ -706,7 +706,7 @@ Explore the recordings, data structure and what researchers needed from the resu
 Prepare
 </p>
 
-<p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+<p class="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed">
 Check timestamps and data quality, then prepare gaze, fixation and annotation data.
 </p>
 
@@ -723,7 +723,7 @@ Check timestamps and data quality, then prepare gaze, fixation and annotation da
 Model
 </p>
 
-<p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+<p class="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed">
 Train and compare YOLO models, then evaluate them on separate test data.
 </p>
 
@@ -740,7 +740,7 @@ Train and compare YOLO models, then evaluate them on separate test data.
 Connect
 </p>
 
-<p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+<p class="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed">
 Run the model on cycling footage, track traffic objects and connect them with gaze and fixation data.
 </p>
 
@@ -750,7 +750,7 @@ Run the model on cycling footage, track traffic objects and connect them with ga
 </div>
 
 
-<div class="max-w-4xl prose-cv">
+<div class="w-full prose-cv">
 
 <h2 class="text-zinc-900 dark:text-white">
 What I worked on
@@ -775,10 +775,23 @@ Trained and compared YOLO models using different image resolutions and training 
 </li>
 
 <li>
-Developed workflows for full video inference, automatic annotations, object tracking, gaze and fixation matching, and explainable AI.
+Developed workflows for full video inference, automatic annotations, object tracking, gaze and fixation matching, and Eigen-CAM explainability.
 </li>
 
 </ul>
+
+</div>
+
+
+<div class="w-full prose-cv">
+
+<h2 class="text-zinc-900 dark:text-white">
+How we measured success
+</h2>
+
+<p>
+During Business Understanding, we defined practical KPIs and success criteria for accuracy, efficiency and usability. These targets guided later development and evaluation.
+</p>
 
 </div>
 
@@ -787,12 +800,16 @@ Developed workflows for full video inference, automatic annotations, object trac
 
 <div class="stat-card reveal">
 
-<p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">
-19
+<p class="text-xs uppercase tracking-widest text-accent mb-2">
+Accuracy target
 </p>
 
-<p class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-cycling sessions processed during data preparation
+<p class="font-display font-bold text-2xl text-zinc-900 dark:text-white">
+≥70% precision / recall
+</p>
+
+<p class="text-base text-zinc-500 dark:text-zinc-400 mt-2">
+with gaze alignment within a ±200 ms temporal tolerance
 </p>
 
 </div>
@@ -800,12 +817,16 @@ cycling sessions processed during data preparation
 
 <div class="stat-card reveal d1">
 
-<p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">
-6.1M+
+<p class="text-xs uppercase tracking-widest text-accent mb-2">
+Efficiency target
 </p>
 
-<p class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-gaze samples aligned with video frames
+<p class="font-display font-bold text-2xl text-zinc-900 dark:text-white">
+≥60–70% less manual time
+</p>
+
+<p class="text-base text-zinc-500 dark:text-zinc-400 mt-2">
+reducing the manual annotation workload for researchers
 </p>
 
 </div>
@@ -813,12 +834,16 @@ gaze samples aligned with video frames
 
 <div class="stat-card reveal d2">
 
-<p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">
-9
+<p class="text-xs uppercase tracking-widest text-accent mb-2">
+Usability target
 </p>
 
-<p class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-traffic object classes in the final workflow
+<p class="font-display font-bold text-2xl text-zinc-900 dark:text-white">
+Research-ready output
+</p>
+
+<p class="text-base text-zinc-500 dark:text-zinc-400 mt-2">
+structured CSV data that could be used for further analysis
 </p>
 
 </div>
@@ -826,7 +851,51 @@ traffic object classes in the final workflow
 </div>
 
 
-<div class="max-w-4xl prose-cv">
+<div class="w-full prose-cv">
+
+<h2 class="text-zinc-900 dark:text-white">
+Checking what the model focused on
+</h2>
+
+<p>
+I also used Eigen-CAM as an explainable AI method to inspect which areas of a frame contributed most strongly to the model's detections. This helped us look beyond the bounding boxes and check whether the model was focusing on visually relevant parts of the scene.
+</p>
+
+</div>
+
+
+<div class="reveal my-10">
+
+<figure class="dashboard-card">
+
+<button
+type="button"
+class="media-button lightbox-trigger"
+data-image="media/xai-eigencam-panel.webp"
+data-caption="Eigen-CAM activation heatmaps used to inspect which image regions contributed most strongly to the model's detections."
+aria-label="Enlarge Eigen-CAM explainability example"
+title="Click to enlarge"
+>
+
+<img
+class="dashboard-image"
+src="media/xai-eigencam-panel.webp"
+alt="Three-panel Eigen-CAM example showing object detections, activation heatmap and a combined overlay on cycling footage."
+loading="lazy"
+/>
+
+</button>
+
+<figcaption class="dashboard-caption">
+Eigen-CAM activation heatmaps helped inspect which parts of the scene contributed most strongly to the model's detections.
+</figcaption>
+
+</figure>
+
+</div>
+
+
+<div class="w-full prose-cv">
 
 <h2 class="text-zinc-900 dark:text-white">
 From footage to research data
@@ -834,6 +903,10 @@ From footage to research data
 
 <p>
 The workflow could take raw cycling footage through object detection and produce automatically annotated video together with CSV files containing detections and related metadata. The detections could then be tracked and connected with gaze and fixation data, giving researchers structured information about the traffic context around the cyclist and what they looked at.
+</p>
+
+<p>
+The final workflow covered nine traffic object classes: bus, car, cargo bike, fatbike, motorcycle, normal bike, pedestrian, scooter and truck.
 </p>
 
 </div>
@@ -847,7 +920,7 @@ The workflow could take raw cycling footage through object detection and produce
 type="button"
 class="media-button lightbox-trigger"
 data-image="media/data-quality-report.webp"
-data-caption="A Streamlit dashboard I built to review dataset size, class balance, train / validation / test splits, and key data quality checks."
+data-caption="A repeatable Streamlit data quality dashboard I built to review dataset size, class balance, train / validation / test splits, quality rules and detected issues."
 aria-label="Enlarge Data Quality Report dashboard"
 title="Click to enlarge"
 >
@@ -862,7 +935,7 @@ loading="lazy"
 </button>
 
 <figcaption class="dashboard-caption">
-A Streamlit dashboard I built to review dataset size, class balance, train / validation / test splits, and key data quality checks.
+A repeatable Streamlit data quality dashboard I built to review dataset size, class balance, train / validation / test splits, quality rules and detected issues.
 </figcaption>
 
 </figure>
